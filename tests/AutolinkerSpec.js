@@ -408,6 +408,22 @@ describe( "Autolinker", function() {
             } );
         });
 
+        describe( "callback", function() {
+
+            it( "should allow additional anchor attributes to be specified via a callback", function() {
+                var result = Autolinker.link( "Test http://www.example.com/ link", {
+                    callback: function(callbackArgs) {
+                        callbackArgs.attributes.push( 'class="my-class"' );
+                        return {
+                            attributes: callbackArgs.attributes
+                        };
+                    }
+                } );
+                expect( result ).toBe( 'Test <a href="http://www.example.com/" target="_blank" class="my-class">example.com</a> link' );
+            } );
+
+        } );
+
 	} );
 
 } );
