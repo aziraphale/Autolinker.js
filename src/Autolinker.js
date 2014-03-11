@@ -126,7 +126,7 @@ var Autolinker = {
 				
 				var anchorHref = matchStr,  // initialize both of these
 				    anchorText = matchStr;  // values as the full match
-
+				
                 if( ( twitterMatch && !enableTwitter ) || ( emailAddress && !enableEmailAddresses ) || ( urlMatch && !enableUrls ) ) {
                     // A disabled link type
                     return prefixStr + anchorText + suffixStr;
@@ -156,16 +156,16 @@ var Autolinker = {
 					anchorText = anchorText.slice( 0, -1 );
 				}
 				
-                // Set the attributes for the anchor tag
-                anchorAttributes.push( 'href="' + anchorHref + '"' );
-                if( newWindow ) {
-                    anchorAttributes.push( 'target="_blank"' );
-                }
+				// Set the attributes for the anchor tag
+				anchorAttributes.push( 'href="' + anchorHref + '"' );
+				if( newWindow ) {
+					anchorAttributes.push( 'target="_blank"' );
+				}
 				
-                // Truncate the anchor text if it is longer than the provided 'truncate' option
-                if( truncate && anchorText.length > truncate ) {
-                    anchorText = anchorText.substring( 0, truncate - 2 ) + '..';
-                }
+				// Truncate the anchor text if it is longer than the provided 'truncate' option
+				if( truncate && anchorText.length > truncate ) {
+					anchorText = anchorText.substring( 0, truncate - 2 ) + '..';
+				}
 				
                 if( callback ) {
                     var callbackArguments = {
@@ -197,7 +197,7 @@ var Autolinker = {
                         suffixStr = callbackResult.linkSuffix;
                     }
                 }
-
+				
 				return prefixStr + '<a ' + anchorAttributes.join( " " ) + '>' + anchorText + '</a>' + suffixStr;  // wrap the match in an anchor tag
 			} );
 			

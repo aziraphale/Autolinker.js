@@ -423,7 +423,7 @@ describe( "Autolinker", function() {
             } );
 
         } );
-
+		
 	} );
 	
 } );
