@@ -206,7 +206,7 @@ var Autolinker = {
                         suffixStr = callbackResult.linkSuffix;
                     }
                 }
-
+				
 				return prefixStr + '<a ' + anchorAttributes.join( " " ) + '>' + anchorText + '</a>' + suffixStr;  // wrap the match in an anchor tag
 			} );
 			
