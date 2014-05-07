@@ -1,7 +1,19 @@
 /*global Autolinker, _, describe, beforeEach, afterEach, it, expect */
 describe( "Autolinker", function() {
 	
-	describe( "link()", function() {
+	describe( "instantiating and using as a class", function() {
+		
+		it( "should configure the instance with configuration options, and then be able to execute the link() method", function() {
+			var autolinker = new Autolinker( { newWindow: false, truncate: 25 } );
+		
+			var result = autolinker.link( "Check out http://www.yahoo.com/some/long/path/to/a/file" );
+			expect( result ).toBe( 'Check out <a href="http://www.yahoo.com/some/long/path/to/a/file">yahoo.com/some/long/pat..</a>' );
+		} );
+		
+	} );
+	
+	
+	describe( "link() method", function() {
 		
 		it( "should automatically link URLs in the form of http://yahoo.com", function() {
 			var result = Autolinker.link( "Joe went to http://yahoo.com" );
@@ -433,22 +445,35 @@ describe( "Autolinker", function() {
 			
 		} );
 		
-        describe( "callback", function() {
+		describe( "`className` option", function() {
+		
+			it( "should not add className when the 'className' option is not a string with at least 1 character", function() {
+				var result = Autolinker.link( "Test http://url.com" );
+				expect( result ).toBe( 'Test <a href="http://url.com" target="_blank">url.com</a>' );
 
-            it( "should allow additional anchor attributes to be specified via a callback", function() {
-                var result = Autolinker.link( "Test http://www.example.com/ link", {
-                    callback: function(callbackArgs) {
-                        callbackArgs.attributes.push( 'class="my-class"' );
-                        return {
-                            attributes: callbackArgs.attributes
-                        };
-                    }
-                } );
-                expect( result ).toBe( 'Test <a href="http://www.example.com/" target="_blank" class="my-class">example.com</a> link' );
-            } );
+				result = Autolinker.link( "Test http://url.com", { className: null } );
+				expect( result ).toBe( 'Test <a href="http://url.com" target="_blank">url.com</a>' );
 
-        } );
+				result = Autolinker.link( "Test http://url.com", { className: "" } );
+				expect( result ).toBe( 'Test <a href="http://url.com" target="_blank">url.com</a>' );
+			} );
+
+			it( "should add className to links", function() {
+				var result = Autolinker.link( "Test http://url.com", { className: 'myLink' } );
+				expect( result ).toBe( 'Test <a href="http://url.com" class="myLink myLink-url" target="_blank">url.com</a>' );
+			} );
+
+			it( "should add className to twitter links", function() {
+				var result = Autolinker.link( "hi from @iggypopschest", { twitter: true, className: 'myLink' } );
+				expect( result ).toBe( 'hi from <a href="https://twitter.com/iggypopschest" class="myLink myLink-twitter" target="_blank">@iggypopschest</a>' );
+			} );
+
+			it( "should add className to email links", function() {
+				var result = Autolinker.link( "Iggy's email is mr@iggypop.com", { email: true, className: 'myLink' } );
+				expect( result ).toBe( 'Iggy\'s email is <a href="mailto:mr@iggypop.com" class="myLink myLink-email" target="_blank">mr@iggypop.com</a>' );
+			} );
+			
+		} );
 		
 	} );
-	
 } );
