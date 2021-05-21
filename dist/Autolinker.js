@@ -2,7 +2,7 @@
  * autolinker
  * 0.8.0
  *
- * Copyright(c) 2014 Gregory Jacobs <greg@greg-jacobs.com>
+ * Copyright(c) 2021 Gregory Jacobs <greg@greg-jacobs.com>
  * MIT Licensed. http://www.opensource.org/licenses/mit-license.php
  *
  * https://github.com/gregjacobs/Autolinker.js
